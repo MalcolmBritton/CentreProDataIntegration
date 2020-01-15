@@ -24,13 +24,15 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.lbBuildings = New System.Windows.Forms.ListBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmdCreateIntermediate = New System.Windows.Forms.Button()
         Me.lbOutput = New System.Windows.Forms.ListBox()
         Me.lbError = New System.Windows.Forms.ListBox()
         Me.cmdClose = New System.Windows.Forms.Button()
-        Me.cmdCreateIntermediate = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.cmdEmpty = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
+        Me.cmdEmpty = New System.Windows.Forms.Button()
+        Me.cmdUpdateLinks = New System.Windows.Forms.Button()
+        Me.cmdMerge = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -45,6 +47,8 @@ Partial Class Form1
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cmdMerge)
+        Me.GroupBox1.Controls.Add(Me.cmdUpdateLinks)
         Me.GroupBox1.Controls.Add(Me.cmdCreateIntermediate)
         Me.GroupBox1.Location = New System.Drawing.Point(266, 30)
         Me.GroupBox1.Name = "GroupBox1"
@@ -52,6 +56,15 @@ Partial Class Form1
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Process"
+        '
+        'cmdCreateIntermediate
+        '
+        Me.cmdCreateIntermediate.Location = New System.Drawing.Point(27, 22)
+        Me.cmdCreateIntermediate.Name = "cmdCreateIntermediate"
+        Me.cmdCreateIntermediate.Size = New System.Drawing.Size(231, 23)
+        Me.cmdCreateIntermediate.TabIndex = 0
+        Me.cmdCreateIntermediate.Text = "Create Intermediate Database"
+        Me.cmdCreateIntermediate.UseVisualStyleBackColor = True
         '
         'lbOutput
         '
@@ -78,15 +91,6 @@ Partial Class Form1
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
-        'cmdCreateIntermediate
-        '
-        Me.cmdCreateIntermediate.Location = New System.Drawing.Point(27, 22)
-        Me.cmdCreateIntermediate.Name = "cmdCreateIntermediate"
-        Me.cmdCreateIntermediate.Size = New System.Drawing.Size(231, 23)
-        Me.cmdCreateIntermediate.TabIndex = 0
-        Me.cmdCreateIntermediate.Text = "Create Intermediate Database"
-        Me.cmdCreateIntermediate.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.cmdReset)
@@ -98,6 +102,15 @@ Partial Class Form1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Database"
         '
+        'cmdReset
+        '
+        Me.cmdReset.Location = New System.Drawing.Point(27, 60)
+        Me.cmdReset.Name = "cmdReset"
+        Me.cmdReset.Size = New System.Drawing.Size(231, 23)
+        Me.cmdReset.TabIndex = 2
+        Me.cmdReset.Text = "Reset Intermediate Database"
+        Me.cmdReset.UseVisualStyleBackColor = True
+        '
         'cmdEmpty
         '
         Me.cmdEmpty.Location = New System.Drawing.Point(27, 31)
@@ -107,14 +120,23 @@ Partial Class Form1
         Me.cmdEmpty.Text = "Empty Intermediate Database"
         Me.cmdEmpty.UseVisualStyleBackColor = True
         '
-        'cmdReset
+        'cmdUpdateLinks
         '
-        Me.cmdReset.Location = New System.Drawing.Point(27, 60)
-        Me.cmdReset.Name = "cmdReset"
-        Me.cmdReset.Size = New System.Drawing.Size(231, 23)
-        Me.cmdReset.TabIndex = 2
-        Me.cmdReset.Text = "Reset Intermediate Database"
-        Me.cmdReset.UseVisualStyleBackColor = True
+        Me.cmdUpdateLinks.Location = New System.Drawing.Point(27, 51)
+        Me.cmdUpdateLinks.Name = "cmdUpdateLinks"
+        Me.cmdUpdateLinks.Size = New System.Drawing.Size(231, 23)
+        Me.cmdUpdateLinks.TabIndex = 1
+        Me.cmdUpdateLinks.Text = "Update Liinks"
+        Me.cmdUpdateLinks.UseVisualStyleBackColor = True
+        '
+        'cmdMerge
+        '
+        Me.cmdMerge.Location = New System.Drawing.Point(27, 80)
+        Me.cmdMerge.Name = "cmdMerge"
+        Me.cmdMerge.Size = New System.Drawing.Size(231, 23)
+        Me.cmdMerge.TabIndex = 2
+        Me.cmdMerge.Text = "Merge to Main Database"
+        Me.cmdMerge.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -147,4 +169,6 @@ Partial Class Form1
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents cmdReset As Button
     Friend WithEvents cmdEmpty As Button
+    Friend WithEvents cmdMerge As Button
+    Friend WithEvents cmdUpdateLinks As Button
 End Class
