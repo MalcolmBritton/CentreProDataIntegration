@@ -79,6 +79,19 @@ Namespace My
                 Me("conIntermediate") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_UM_1282;Integrated Sec"& _ 
+            "urity=True;MultipleActiveResultSets=true")>  _
+        Public Property conTridentCounrt() As String
+            Get
+                Return CType(Me("conTridentCounrt"),String)
+            End Get
+            Set
+                Me("conTridentCounrt") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -139,6 +139,376 @@
 
     'End Function
 
+    Public Shared Function UpdateAssetTypesIds() As cMultiValueReturn
+
+        Dim SQLstring As String = ""
+        Dim SQLUpdate As String = ""
+        Dim RowsAffected As Integer
+        Dim Retval As New cMultiValueReturn
+
+        ' ID is the original old ID from the local database
+        SQLstring = "SELECT NewID, ID FROM AssetTypes"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLstring, connection)
+
+                Using reader As SqlDataReader = cmd.ExecuteReader
+
+                    If reader.HasRows Then
+
+                        Do While reader.Read
+
+                            ' update related table data here
+                            ' AssetGroupTypes
+                            SQLUpdate = "UPDATE AssetGroupTypes SET AssetTypeID = " & reader("NewID").ToString & " WHERE AssetTypeID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields AssetTypes/AssetGroupTypes " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields AssetTypes/AssetGroupTypes FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                            ' Assets
+                            SQLUpdate = "UPDATE Assets SET AssetTypeID = " & reader("NewID").ToString & " WHERE AssetTypeID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields AssetTypes/Assets " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields AssetTypes/Assets FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                        Loop
+
+                    End If
+
+                End Using ' reader
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return Retval
+
+
+    End Function
+
+    Public Shared Function UpdateAssetGroupsIds() As cMultiValueReturn
+
+        Dim SQLstring As String = ""
+        Dim SQLUpdate As String = ""
+        Dim RowsAffected As Integer
+        Dim Retval As New cMultiValueReturn
+
+        ' ID is the original old ID from the local database
+        SQLstring = "SELECT NewID, ID FROM AssetGroups"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLstring, connection)
+
+                Using reader As SqlDataReader = cmd.ExecuteReader
+
+                    If reader.HasRows Then
+
+                        Do While reader.Read
+
+                            ' update related table data here
+                            ' AssetGroupTypes
+                            SQLUpdate = "UPDATE AssetGroupTypes SET AssetGroupID = " & reader("NewID").ToString & " WHERE AssetGroupID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields AssetGroups/AssetGroupTypes " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields AssetGroups/AssetGroupTypes FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                            ' AssetTypes
+                            SQLUpdate = "UPDATE AssetTypes SET GroupID = " & reader("NewID").ToString & " WHERE GroupID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields AssetGroups/AssetTypes " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields AssetGroups/AssetTypes FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                        Loop
+
+                    End If
+
+                End Using ' reader
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return Retval
+
+    End Function
+
+    Public Shared Function UpdateActionsIDs() As cMultiValueReturn
+
+        Dim SQLstring As String = ""
+        Dim SQLUpdate As String = ""
+        Dim RowsAffected As Integer
+        Dim Retval As New cMultiValueReturn
+
+        ' ID is the original old ID from the local database
+        SQLstring = "SELECT NewID, ID FROM Actions"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLstring, connection)
+
+                Using reader As SqlDataReader = cmd.ExecuteReader
+
+                    If reader.HasRows Then
+
+                        Do While reader.Read
+
+                            ' update related table data here
+                            ' FrontDeskNoteActions
+                            SQLUpdate = "UPDATE FrontDeskNoteActions SET ActionID = " & reader("NewID").ToString & " WHERE ActionID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields Actions/FrontDeskNoteActions " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields Actions/FrontDeskNoteActions FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                        Loop
+
+                    End If
+
+                End Using ' reader
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return Retval
+
+    End Function
+
+    Public Shared Function UpdateAccommodationIDs() As cMultiValueReturn
+
+        Dim SQLstring As String = ""
+        Dim SQLUpdate As String = ""
+        Dim RowsAffected As Integer
+        Dim Retval As New cMultiValueReturn
+
+        ' ID is the original old ID from the local database
+        SQLstring = "SELECT NewID, ID FROM Accommodations"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLstring, connection)
+
+                Using reader As SqlDataReader = cmd.ExecuteReader
+
+                    If reader.HasRows Then
+
+                        Do While reader.Read
+
+                            ' update related table data here
+                            ' Assets
+                            SQLUpdate = "UPDATE Assets SET LocationID = " & reader("NewID").ToString & " WHERE LocationID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields Accommodation/Assets " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields Accommodation/Assets FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                            ' CalendarRooms
+                            SQLUpdate = "UPDATE CalendarRooms SET RoomID = " & reader("NewID").ToString & " WHERE RoomID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields Accommodation/CalendarRooms " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields Accommodation/CalendarRooms FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                            ' LicenceRooms
+                            SQLUpdate = "UPDATE LicenceRooms SET AccommodationID = " & reader("NewID").ToString & " WHERE AccommodationID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields Accommodation/LicenceRooms " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields Accommodation/LicenceRooms FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                            ' LicenceTaperHeader
+                            SQLUpdate = "UPDATE LicenceTaperHeader SET RoomID = " & reader("NewID").ToString & " WHERE RoomID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields Accommodation/LicenceTaperHeader " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields Accommodation/LicenceTaperHeader FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                            ' Meters
+                            SQLUpdate = "UPDATE Meters SET LocationID = " & reader("NewID").ToString & " WHERE LocationID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields Accommodation/Meters " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields Accommodation/Meters FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                            ' RoomBookings
+                            SQLUpdate = "UPDATE RoomBookings SET RoomID = " & reader("NewID").ToString & " WHERE RoomID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields Accommodation/RoomBookings " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields Accommodation/RoomBookings FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                            ' RoomGroupRooms
+                            SQLUpdate = "UPDATE RoomGroupRooms SET RoomID = " & reader("NewID").ToString & " WHERE RoomID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields Accommodation/RoomGroupRooms " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields Accommodation/RoomGroupRooms FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                            ' Viewings
+                            SQLUpdate = "UPDATE Viewings SET RoomID = " & reader("NewID").ToString & " WHERE RoomID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                    If RowsAffected > 0 Then
+                                        Retval.PassedHistory.Items.Add("Updated ID Fields Accommodation/Viewings " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    End If
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields Accommodation/Viewings FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+                            End Using 'cmdUpdate
+
+                        Loop
+
+                    End If
+
+                End Using ' reader
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return Retval
+
+    End Function
+
+    Public Shared Function GetDatabases() As List(Of cDatabase)
+
+        Dim db As New List(Of cDatabase)
+        Dim d As cDatabase
+        Dim SQLstring As String
+
+        SQLstring = "SELECT ID, DatabaseName FROM Databases WHERE DatabaseName NOT LIKE '%Prospects%'"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionTrident
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLstring, connection)
+
+                Using reader As SqlDataReader = cmd.ExecuteReader
+
+                    If reader.HasRows Then
+
+                        db = New List(Of cDatabase)
+
+                        Do While reader.Read
+                            d = New cDatabase
+                            d.ID = reader("ID")
+                            d.DatabaseName = reader("DatabaseName")
+                            db.Add(d)
+                        Loop
+
+                    End If
+
+                End Using ' reader
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return db
+
+    End Function
+
     Public Shared Function GetTableNames() As List(Of String)
 
         Dim tn As New List(Of String)

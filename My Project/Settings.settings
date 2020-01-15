@@ -8,5 +8,8 @@
     <Setting Name="conIntermediate" Type="System.String" Scope="User">
       <Value Profile="(Default)">Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_Intermediate;Integrated Security=True;MultipleActiveResultSets=true</Value>
     </Setting>
+    <Setting Name="conTridentCounrt" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_UM_1282;Integrated Security=True;MultipleActiveResultSets=true</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
