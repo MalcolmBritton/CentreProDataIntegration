@@ -36,6 +36,8 @@ Partial Class Form1
         Me.cmdEmpty = New System.Windows.Forms.Button()
         Me.cmdClearOutput = New System.Windows.Forms.Button()
         Me.cmdClearErrors = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtCurrentDatabase = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -43,7 +45,7 @@ Partial Class Form1
         'lbBuildings
         '
         Me.lbBuildings.FormattingEnabled = True
-        Me.lbBuildings.Location = New System.Drawing.Point(12, 36)
+        Me.lbBuildings.Location = New System.Drawing.Point(16, 72)
         Me.lbBuildings.Name = "lbBuildings"
         Me.lbBuildings.Size = New System.Drawing.Size(247, 433)
         Me.lbBuildings.TabIndex = 0
@@ -54,7 +56,7 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.cmdMerge)
         Me.GroupBox1.Controls.Add(Me.cmdUpdateLinks)
         Me.GroupBox1.Controls.Add(Me.cmdCreateIntermediate)
-        Me.GroupBox1.Location = New System.Drawing.Point(266, 30)
+        Me.GroupBox1.Location = New System.Drawing.Point(270, 66)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(285, 225)
         Me.GroupBox1.TabIndex = 1
@@ -100,7 +102,7 @@ Partial Class Form1
         'lbOutput
         '
         Me.lbOutput.FormattingEnabled = True
-        Me.lbOutput.Location = New System.Drawing.Point(558, 30)
+        Me.lbOutput.Location = New System.Drawing.Point(562, 66)
         Me.lbOutput.Name = "lbOutput"
         Me.lbOutput.Size = New System.Drawing.Size(478, 212)
         Me.lbOutput.TabIndex = 2
@@ -108,7 +110,7 @@ Partial Class Form1
         'lbError
         '
         Me.lbError.FormattingEnabled = True
-        Me.lbError.Location = New System.Drawing.Point(557, 257)
+        Me.lbError.Location = New System.Drawing.Point(561, 293)
         Me.lbError.Name = "lbError"
         Me.lbError.Size = New System.Drawing.Size(479, 212)
         Me.lbError.TabIndex = 3
@@ -126,7 +128,7 @@ Partial Class Form1
         '
         Me.GroupBox2.Controls.Add(Me.cmdReset)
         Me.GroupBox2.Controls.Add(Me.cmdEmpty)
-        Me.GroupBox2.Location = New System.Drawing.Point(266, 267)
+        Me.GroupBox2.Location = New System.Drawing.Point(270, 303)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(285, 202)
         Me.GroupBox2.TabIndex = 5
@@ -153,7 +155,7 @@ Partial Class Form1
         '
         'cmdClearOutput
         '
-        Me.cmdClearOutput.Location = New System.Drawing.Point(1055, 30)
+        Me.cmdClearOutput.Location = New System.Drawing.Point(1059, 66)
         Me.cmdClearOutput.Name = "cmdClearOutput"
         Me.cmdClearOutput.Size = New System.Drawing.Size(75, 23)
         Me.cmdClearOutput.TabIndex = 6
@@ -162,18 +164,37 @@ Partial Class Form1
         '
         'cmdClearErrors
         '
-        Me.cmdClearErrors.Location = New System.Drawing.Point(1055, 257)
+        Me.cmdClearErrors.Location = New System.Drawing.Point(1059, 293)
         Me.cmdClearErrors.Name = "cmdClearErrors"
         Me.cmdClearErrors.Size = New System.Drawing.Size(75, 23)
         Me.cmdClearErrors.TabIndex = 7
         Me.cmdClearErrors.Text = "Clear"
         Me.cmdClearErrors.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(22, 29)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(101, 13)
+        Me.Label1.TabIndex = 8
+        Me.Label1.Text = "Selected Database"
+        '
+        'txtCurrentDatabase
+        '
+        Me.txtCurrentDatabase.Enabled = False
+        Me.txtCurrentDatabase.Location = New System.Drawing.Point(129, 26)
+        Me.txtCurrentDatabase.Name = "txtCurrentDatabase"
+        Me.txtCurrentDatabase.Size = New System.Drawing.Size(399, 22)
+        Me.txtCurrentDatabase.TabIndex = 9
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1142, 518)
+        Me.Controls.Add(Me.txtCurrentDatabase)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmdClearErrors)
         Me.Controls.Add(Me.cmdClearOutput)
         Me.Controls.Add(Me.GroupBox2)
@@ -190,6 +211,7 @@ Partial Class Form1
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -207,4 +229,6 @@ Partial Class Form1
     Friend WithEvents cmdDropOldID As Button
     Friend WithEvents cmdClearOutput As Button
     Friend WithEvents cmdClearErrors As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtCurrentDatabase As TextBox
 End Class
