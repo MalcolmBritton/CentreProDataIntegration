@@ -87,7 +87,7 @@ Partial Class Form1
         Me.cmdUpdateLinks.Name = "cmdUpdateLinks"
         Me.cmdUpdateLinks.Size = New System.Drawing.Size(231, 23)
         Me.cmdUpdateLinks.TabIndex = 1
-        Me.cmdUpdateLinks.Text = "Update Liinks"
+        Me.cmdUpdateLinks.Text = "Update Links"
         Me.cmdUpdateLinks.UseVisualStyleBackColor = True
         '
         'cmdCreateIntermediate
