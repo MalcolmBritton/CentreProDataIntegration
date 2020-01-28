@@ -438,7 +438,7 @@ Public Class Form1
                     lbOutput.TopIndex = lbOutput.Items.Count - 1
                     cData.DropColumn("ID", tn)
                     If cData.HasColumn("NewID", tn) Then
-                        lbOutput.Items.Add("Renamin NewID to ID in " & tn)
+                        lbOutput.Items.Add("Renaming NewID to ID in " & tn)
                         lbOutput.TopIndex = lbOutput.Items.Count - 1
                         cData.RenameColumn("NewID", tn, "ID")
                     End If
@@ -456,9 +456,54 @@ Public Class Form1
         Dim result As DialogResult = ofd.ShowDialog()
 
         If result = Windows.Forms.DialogResult.OK Then
-            cData.CreateIntermediateDatabase(ofd.FileName)
+            If cData.CreateIntermediateDatabase(ofd.FileName) <> 0 Then
+                lbOutput.Items.Add("Created Database CentrePro_Intermediate")
+                lbOutput.TopIndex = lbOutput.Items.Count - 1
+            End If
         End If
 
+        result = ofd.ShowDialog()
+
+        If result = Windows.Forms.DialogResult.OK Then
+            If cData.CreateIntermediateDatabaseTables(ofd.FileName) <> 0 Then
+                lbOutput.Items.Add("Created Tables in Database CentrePro_Intermediate")
+                lbOutput.TopIndex = lbOutput.Items.Count - 1
+            End If
+        End If
+
+
+    End Sub
+
+    Private Sub cmdDropDatabase_Click(sender As Object, e As EventArgs) Handles cmdDropDatabase.Click
+
+        If cData.DropIntermediateDatabase() <> 0 Then
+            lbOutput.Items.Add("Dropped Database CentrePro_Intermediate")
+            lbOutput.TopIndex = lbOutput.Items.Count - 1
+        End If
+
+
+
+    End Sub
+
+    Private Sub cmdMerge_Click(sender As Object, e As EventArgs) Handles cmdMerge.Click
+
+        Dim tableNames As List(Of String) = cData.GetTableNames
+
+        If tableNames.Count > 0 Then
+
+            For Each tn As String In tableNames
+
+                lbOutput.Items.Add("Adding Table Data to CentrePro_Master - " & tn)
+                lbOutput.TopIndex = lbOutput.Items.Count - 1
+                If cData.ImportIntermediateTableToMaster(tn) = True Then
+                    'lbOutput.Items.Add("Table " & tn & " added to Intermediate")
+                    'lbOutput.TopIndex = lbOutput.Items.Count - 1
+                Else
+                    lbError.Items.Add("Table " & tn & " NOT imported to CentrePro_Master")
+                    lbError.TopIndex = lbError.Items.Count - 1
+                End If
+            Next
+        End If
 
     End Sub
 End Class

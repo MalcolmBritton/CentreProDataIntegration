@@ -56,14 +56,14 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_Integrated;Integrated "& _ 
-            "Security=True;MultipleActiveResultSets=true")>  _
-        Public Property conIntegrated() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_Master;Integrated Secu"& _ 
+            "rity=True;MultipleActiveResultSets=true")>  _
+        Public Property conCentreProMaster() As String
             Get
-                Return CType(Me("conIntegrated"),String)
+                Return CType(Me("conCentreProMaster"),String)
             End Get
             Set
-                Me("conIntegrated") = value
+                Me("conCentreProMaster") = value
             End Set
         End Property
         

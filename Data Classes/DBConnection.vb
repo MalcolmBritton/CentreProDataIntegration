@@ -21,9 +21,9 @@
         End If
     End Sub
 
-    Public Shared Function GetConnectionIntegrated() As SqlConnection
+    Public Shared Function GetConnectionCentreProMaster() As SqlConnection
 
-        Return New SqlConnection(My.Settings.conIntegrated)
+        Return New SqlConnection(My.Settings.conCentreProMaster)
 
     End Function
 

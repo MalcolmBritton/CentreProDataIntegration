@@ -4155,6 +4155,29 @@ Public Class cData
 
     End Function
 
+    Public Shared Function DropIntermediateDatabase() As Boolean
+
+        Dim bRetVal As Integer
+
+        Dim SQLString As String = "DROP DATABASE CentrePro_Intermediate"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionServer
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLString, connection)
+
+                bRetVal = cmd.ExecuteNonQuery
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return bRetVal
+
+
+    End Function
+
     Public Shared Function CreateIntermediateDatabase(filename As String) As Integer
 
         Dim bRetVal As Integer
@@ -4173,6 +4196,28 @@ Public Class cData
         End Using ' connection
 
         Return bRetVal
+
+    End Function
+
+    Public Shared Function CreateIntermediateDatabaseTables(filename As String) As Integer
+
+        Dim bRetVal As Integer
+
+        Dim reader As New StreamReader(filename)
+        Using connection As SqlConnection = DBConnection.GetConnectionServer
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(reader.ReadToEnd, connection)
+
+                bRetVal = cmd.ExecuteNonQuery
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return bRetVal
+
 
     End Function
 
@@ -4293,6 +4338,36 @@ Public Class cData
             End Try
 
         End Using 'connection
+    End Function
+
+    Public Shared Function ImportIntermediateTableToMaster(sTableName As String)
+
+        Dim SQLUpdate As String = String.Empty
+
+        Select Case HasIdentityColumn(sTableName)
+            Case 1
+                SQLUpdate = "SET IDENTITY_INSERT " & sTableName & " ON "
+                SQLUpdate &= "INSERT INTO " & sTableName & " SELECT * FROM CentrePro_intermediate.dbo." & sTableName
+                SQLUpdate &= " SET IDENTITY_INSERT " & sTableName & " OFF "
+            Case 0
+                SQLUpdate = "INSERT INTO " & sTableName & " SELECT * FROM CentrePro_intermediate.dbo." & sTableName
+        End Select
+
+        Using connection As SqlConnection = DBConnection.GetConnectionCentreProMaster
+
+            connection.Open()
+
+            Try
+                Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                    cmdUpdate.ExecuteNonQuery()
+                End Using 'cmdUpdate
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+
+        End Using 'connection
+
     End Function
 
     Public Shared Function Truncate(sTableName As String) As String
