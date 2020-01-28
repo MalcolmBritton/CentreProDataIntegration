@@ -371,6 +371,17 @@ Public Class Form1
             lbError.TopIndex = lbError.Items.Count - 1
         End If
 
+        ' ListData
+        lbOutput.Items.Add("Updating ListData table IDs...")
+        lbOutput.TopIndex = lbOutput.Items.Count - 1
+        Dim LDReturns As cMultiValueReturn = cData.UpdateListDataIDs()
+        lbOutput.Items.AddRange(LDReturns.PassedHistory.Items)
+        lbOutput.TopIndex = lbOutput.Items.Count - 1
+        If LDReturns.OverallResult = False Then
+            lbError.Items.AddRange(LDReturns.FailedHistory.Items)
+            lbError.TopIndex = lbError.Items.Count - 1
+        End If
+
         lbOutput.Items.Add(" **** Finished Updating ID Links ****")
         lbOutput.TopIndex = lbOutput.Items.Count - 1
 
@@ -411,5 +422,43 @@ Public Class Form1
 
     Private Sub cmdClearErrors_Click(sender As Object, e As EventArgs) Handles cmdClearErrors.Click
         lbError.Items.Clear()
+    End Sub
+
+    Private Sub cmdDropOldID_Click(sender As Object, e As EventArgs) Handles cmdDropOldID.Click
+
+        Dim tableNames As List(Of String) = cData.GetTableNames
+
+        If tableNames.Count > 0 Then
+
+            For Each tn As String In tableNames
+
+                If cData.HasColumn("ID", tn) > 0 Then
+
+                    lbOutput.Items.Add("Dropping ID Column from " & tn)
+                    lbOutput.TopIndex = lbOutput.Items.Count - 1
+                    cData.DropColumn("ID", tn)
+                    If cData.HasColumn("NewID", tn) Then
+                        lbOutput.Items.Add("Renamin NewID to ID in " & tn)
+                        lbOutput.TopIndex = lbOutput.Items.Count - 1
+                        cData.RenameColumn("NewID", tn, "ID")
+                    End If
+                End If
+
+            Next
+
+        End If
+
+    End Sub
+
+    Private Sub cmdCreateIntermediateDatabase_Click(sender As Object, e As EventArgs) Handles cmdCreateIntermediateDatabase.Click
+
+        Dim ofd As New OpenFileDialog
+        Dim result As DialogResult = ofd.ShowDialog()
+
+        If result = Windows.Forms.DialogResult.OK Then
+            cData.CreateIntermediateDatabase(ofd.FileName)
+        End If
+
+
     End Sub
 End Class

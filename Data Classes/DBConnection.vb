@@ -39,6 +39,12 @@
 
     End Function
 
+    Public Shared Function GetConnectionServer()
+
+        Return New SqlConnection(My.Settings.conServerOnly)
+
+    End Function
+
     Public Shared Function GetConnectionBuilding(sConn As String) As SqlConnection
 
         ' Connect to a specific building database in the enterprise

@@ -92,6 +92,18 @@ Namespace My
                 Me("conTridentCounrt") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=HELVELLYN\SQLEXPRESS;uid=sa;pwd=Spyplane1;database=")>  _
+        Public Property conServerOnly() As String
+            Get
+                Return CType(Me("conServerOnly"),String)
+            End Get
+            Set
+                Me("conServerOnly") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

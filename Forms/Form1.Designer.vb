@@ -38,6 +38,7 @@ Partial Class Form1
         Me.cmdClearErrors = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtCurrentDatabase = New System.Windows.Forms.TextBox()
+        Me.cmdCreateIntermediateDatabase = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -126,6 +127,7 @@ Partial Class Form1
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.cmdCreateIntermediateDatabase)
         Me.GroupBox2.Controls.Add(Me.cmdReset)
         Me.GroupBox2.Controls.Add(Me.cmdEmpty)
         Me.GroupBox2.Location = New System.Drawing.Point(270, 303)
@@ -137,7 +139,7 @@ Partial Class Form1
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(27, 60)
+        Me.cmdReset.Location = New System.Drawing.Point(27, 103)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(231, 23)
         Me.cmdReset.TabIndex = 2
@@ -146,7 +148,7 @@ Partial Class Form1
         '
         'cmdEmpty
         '
-        Me.cmdEmpty.Location = New System.Drawing.Point(27, 31)
+        Me.cmdEmpty.Location = New System.Drawing.Point(27, 74)
         Me.cmdEmpty.Name = "cmdEmpty"
         Me.cmdEmpty.Size = New System.Drawing.Size(231, 23)
         Me.cmdEmpty.TabIndex = 1
@@ -187,6 +189,15 @@ Partial Class Form1
         Me.txtCurrentDatabase.Name = "txtCurrentDatabase"
         Me.txtCurrentDatabase.Size = New System.Drawing.Size(399, 22)
         Me.txtCurrentDatabase.TabIndex = 9
+        '
+        'cmdCreateIntermediateDatabase
+        '
+        Me.cmdCreateIntermediateDatabase.Location = New System.Drawing.Point(27, 45)
+        Me.cmdCreateIntermediateDatabase.Name = "cmdCreateIntermediateDatabase"
+        Me.cmdCreateIntermediateDatabase.Size = New System.Drawing.Size(231, 23)
+        Me.cmdCreateIntermediateDatabase.TabIndex = 3
+        Me.cmdCreateIntermediateDatabase.Text = "Create Intermediate Database"
+        Me.cmdCreateIntermediateDatabase.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -231,4 +242,5 @@ Partial Class Form1
     Friend WithEvents cmdClearErrors As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents txtCurrentDatabase As TextBox
+    Friend WithEvents cmdCreateIntermediateDatabase As Button
 End Class

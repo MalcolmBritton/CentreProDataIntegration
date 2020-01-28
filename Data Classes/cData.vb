@@ -1,4 +1,6 @@
-﻿Public Class cData
+﻿Imports System.IO
+
+Public Class cData
 
     ' commented code as aide memoir only on how to write the data access procedures - One save and one read and one insert!
 
@@ -3665,6 +3667,406 @@
 
     End Function
 
+    Public Shared Function UpdateListDataIDs() As cMultiValueReturn
+
+        Dim SQLstring As String = ""
+        Dim SQLUpdate As String = ""
+        Dim RowsAffected As Integer
+        Dim Retval As New cMultiValueReturn
+
+        ' ID is the original old ID from the local database
+        SQLstring = "SELECT NewID, ID FROM ListData"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLstring, connection)
+
+                Using reader As SqlDataReader = cmd.ExecuteReader
+
+                    If reader.HasRows Then
+
+                        Do While reader.Read
+
+                            ' update related table data here
+                            ' Accommodations StatusID
+                            SQLUpdate = "UPDATE Accommodations SET StatusID = " & reader("NewID").ToString & " WHERE StatusID = " & reader("ID").ToString
+                            Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Accommodations/StatusID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Accommodations TypeID
+                                SQLUpdate = "UPDATE Accommodations SET TypeID = " & reader("NewID").ToString & " WHERE TypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Accommodations/TypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Actions StatusID
+                                SQLUpdate = "UPDATE Actions SET StatusID = " & reader("NewID").ToString & " WHERE StatusID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Actions/StatusID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Addresses typeID
+                                SQLUpdate = "UPDATE Addresses SET TypeID = " & reader("NewID").ToString & " WHERE TypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Addresses/TypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Availability AvailabilityID
+                                SQLUpdate = "UPDATE Availability SET AvailabilityID = " & reader("NewID").ToString & " WHERE AvailabilityID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Availability/AvailabilityID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' CalendarRooms CalendarID
+                                SQLUpdate = "UPDATE CalendarRooms SET CalendarID = " & reader("NewID").ToString & " WHERE CalendarID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/CalendarRooms/CalendarID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ClientFilters BusinessTypeID
+                                SQLUpdate = "UPDATE ClientFilters SET BusinessTypeID = " & reader("NewID").ToString & " WHERE BusinessTypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ClientFilters/BusinessTypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ClientFilters ClientTypeID
+                                SQLUpdate = "UPDATE ClientFilters SET ClientTypeID = " & reader("NewID").ToString & " WHERE ClientTypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ClientFilters/ClientTypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ClientFilters SourceID
+                                SQLUpdate = "UPDATE ClientFilters SET SourceID = " & reader("NewID").ToString & " WHERE SourceID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ClientFilters/SourceID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ClientFilters StatusID
+                                SQLUpdate = "UPDATE ClientFilters SET StatusID = " & reader("NewID").ToString & " WHERE StatusID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ClientFilters/StatusID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ClientFilters TradingTypeID
+                                SQLUpdate = "UPDATE ClientFilters SET TradingTypeID = " & reader("NewID").ToString & " WHERE TradingTypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ClientFilters/TradingTypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ClientGroupClients GroupID
+                                SQLUpdate = "UPDATE ClientGroupClients SET GroupID = " & reader("NewID").ToString & " WHERE GroupID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ClientGroupClients/GroupID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Clients SourceID
+                                SQLUpdate = "UPDATE Clients SET SourceID = " & reader("NewID").ToString & " WHERE SourceID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Clients/SourceID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Clients StatusID
+                                SQLUpdate = "UPDATE Clients SET StatusID = " & reader("NewID").ToString & " WHERE StatusID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Clients/StatusID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Clients TypeID
+                                SQLUpdate = "UPDATE Clients SET TypeID = " & reader("NewID").ToString & " WHERE TypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Clients/TypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Companies BusinessTypeID
+                                SQLUpdate = "UPDATE Companies SET BusinessTypeID = " & reader("NewID").ToString & " WHERE BusinessTypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Companies/BusinessTypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Companies TradingTypeID
+                                SQLUpdate = "UPDATE Companies SET TradingTypeID = " & reader("NewID").ToString & " WHERE TradingTypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Companies/TradingTypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ContactHistory StatusID
+                                SQLUpdate = "UPDATE ContactHistory SET StatusID = " & reader("NewID").ToString & " WHERE StatusID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ContactHistory/StatusID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ContactHistory TypeID
+                                SQLUpdate = "UPDATE ContactHistory SET TypeID = " & reader("NewID").ToString & " WHERE TypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ContactHistory/TypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Contacts InactiveReasonID
+                                SQLUpdate = "UPDATE Contacts SET InactiveReasonID = " & reader("NewID").ToString & " WHERE InactiveReasonID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Contacts/InactiveReasonID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Contacts SourceID
+                                SQLUpdate = "UPDATE Contacts SET SourceID = " & reader("NewID").ToString & " WHERE SourceID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Contacts/SourceID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Contacts StatusID
+                                SQLUpdate = "UPDATE Contacts SET StatusID = " & reader("NewID").ToString & " WHERE StatusID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Contacts/StatusID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' CouriersAndTaxis ProviderID
+                                SQLUpdate = "UPDATE CouriersAndTaxis SET ProviderID = " & reader("NewID").ToString & " WHERE ProviderID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/CouriersAndTaxis/ProviderID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' CustomComments GroupID
+                                SQLUpdate = "UPDATE CustomComments SET GroupID = " & reader("NewID").ToString & " WHERE GroupID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/CustomComments/GroupID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Deliveries DeliveryTypeID
+                                SQLUpdate = "UPDATE Deliveries SET DeliveryTypeID = " & reader("NewID").ToString & " WHERE DeliveryTypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Deliveries/DeliveryTypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' EmailAddresses TypeID
+                                SQLUpdate = "UPDATE EmailAddresses SET TypeID = " & reader("NewID").ToString & " WHERE TypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/EmailAddresses/TypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' FrontDeskNotes StatusID
+                                SQLUpdate = "UPDATE FrontDeskNotes SET StatusID = " & reader("NewID").ToString & " WHERE StatusID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/FrontDeskNotes/StatusID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' FrontDeskNotes TypeID
+                                SQLUpdate = "UPDATE FrontDeskNotes SET TypeID = " & reader("NewID").ToString & " WHERE TypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/FrontDeskNotes/TypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' Meters MeterTypeID
+                                SQLUpdate = "UPDATE Meters SET MeterTypeID = " & reader("NewID").ToString & " WHERE MeterTypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/Meters/MeterTypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' RoomBookings LayoutID
+                                SQLUpdate = "UPDATE RoomBookings SET LayoutID = " & reader("NewID").ToString & " WHERE LayoutID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/RoomBookings/LayoutID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' RoomBookings StatusID
+                                SQLUpdate = "UPDATE RoomBookings SET StatusID = " & reader("NewID").ToString & " WHERE StatusID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/RoomBookings/StatusID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' RoomGroupRooms GroupID
+                                SQLUpdate = "UPDATE RoomGroupRooms SET GroupID = " & reader("NewID").ToString & " WHERE GroupID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/RoomGroupRooms/GroupID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ServiceChargeGroupTypes GroupID
+                                SQLUpdate = "UPDATE ServiceChargeGroupTypes SET GroupID = " & reader("NewID").ToString & " WHERE GroupID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ServiceChargeGroupTypes/GroupID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' ServiceChargeGroupTypes TypeID
+                                SQLUpdate = "UPDATE ServiceChargeGroupTypes SET TypeID = " & reader("NewID").ToString & " WHERE TypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/ServiceChargeGroupTypes/TypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' TelephoneNumbers TypeID
+                                SQLUpdate = "UPDATE TelephoneNumbers SET TypeID = " & reader("NewID").ToString & " WHERE TypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/TelephoneNumbers/TypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+                                ' WebAddresses TypeID
+                                SQLUpdate = "UPDATE WebAddresses SET TypeID = " & reader("NewID").ToString & " WHERE TypeID = " & reader("ID").ToString
+                                cmdUpdate.CommandText = SQLUpdate
+                                Try
+                                    RowsAffected = cmdUpdate.ExecuteNonQuery()
+                                Catch ex As Exception
+                                    Retval.FailedHistory.Items.Add("Update ID Fields ListData/WebAddresses/TypeID FAILED " & reader("ID").ToString & "/" & reader("NewID").ToString)
+                                    Retval.OverallResult = False
+                                End Try
+
+
+                            End Using 'cmdUpdate
+
+                        Loop
+
+                    End If
+
+                End Using ' reader
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return Retval
+
+    End Function
+
     Public Shared Function GetDatabases() As List(Of cDatabase)
 
         Dim db As New List(Of cDatabase)
@@ -3753,6 +4155,95 @@
 
     End Function
 
+    Public Shared Function CreateIntermediateDatabase(filename As String) As Integer
+
+        Dim bRetVal As Integer
+
+        Dim reader As New StreamReader(filename)
+        Using connection As SqlConnection = DBConnection.GetConnectionServer
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(reader.ReadToEnd, connection)
+
+                bRetVal = cmd.ExecuteNonQuery
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return bRetVal
+
+    End Function
+
+
+    Public Shared Function HasColumn(colName As String, tablename As String) As Integer
+
+        Dim bRetVal As Integer
+
+        Dim SQLString As String = "SELECT COUNT(OBJECT_ID) FROM sys.columns WHERE Name = N'" & colName & "' and OBJECT_ID = OBJECT_ID(N'" & tablename & "')"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLString, connection)
+
+                bRetVal = cmd.ExecuteScalar
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return bRetVal
+
+    End Function
+
+    Public Shared Function DropColumn(colName As String, tableName As String) As Integer
+
+        Dim bRetVal As Integer
+
+        Dim SQLString As String = "ALTER TABLE " & tableName & " DROP COLUMN " & colName
+
+        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLString, connection)
+
+                bRetVal = cmd.ExecuteNonQuery
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return bRetVal
+
+    End Function
+
+    Public Shared Function RenameColumn(colName As String, tableName As String, newColName As String) As Integer
+
+        Dim bRetVal As Integer
+
+        Dim SQLString As String = "EXEC sp_rename '" & tableName & "." & colName & "', '" & newColName & "', 'COLUMN'"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLString, connection)
+
+                bRetVal = cmd.ExecuteNonQuery
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return bRetVal
+
+
+    End Function
+
     Public Shared Function HasIdentityColumn(tableName As String) As Integer
 
         Dim bRetVal As Integer
@@ -3793,7 +4284,7 @@
             connection.Open()
 
             Try
-                Using cmdUpdate As New SqlCommand(SQLupdate, connection)
+                Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
                     cmdUpdate.ExecuteNonQuery()
                 End Using 'cmdUpdate
                 Return True

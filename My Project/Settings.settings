@@ -11,5 +11,8 @@
     <Setting Name="conTridentCounrt" Type="System.String" Scope="User">
       <Value Profile="(Default)">Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_UM_1282;Integrated Security=True;MultipleActiveResultSets=true</Value>
     </Setting>
+    <Setting Name="conServerOnly" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=HELVELLYN\SQLEXPRESS;uid=sa;pwd=Spyplane1;database=</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
