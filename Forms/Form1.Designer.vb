@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.lbBuildings = New System.Windows.Forms.ListBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cmdDropOldID = New System.Windows.Forms.Button()
@@ -32,16 +33,20 @@ Partial Class Form1
         Me.lbError = New System.Windows.Forms.ListBox()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cmdDropDatabase = New System.Windows.Forms.Button()
+        Me.cmdCreateIntermediateDatabase = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
         Me.cmdEmpty = New System.Windows.Forms.Button()
         Me.cmdClearOutput = New System.Windows.Forms.Button()
         Me.cmdClearErrors = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtCurrentDatabase = New System.Windows.Forms.TextBox()
-        Me.cmdCreateIntermediateDatabase = New System.Windows.Forms.Button()
-        Me.cmdDropDatabase = New System.Windows.Forms.Button()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.cmdStage2Database = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'lbBuildings
@@ -49,11 +54,12 @@ Partial Class Form1
         Me.lbBuildings.FormattingEnabled = True
         Me.lbBuildings.Location = New System.Drawing.Point(16, 72)
         Me.lbBuildings.Name = "lbBuildings"
-        Me.lbBuildings.Size = New System.Drawing.Size(247, 433)
+        Me.lbBuildings.Size = New System.Drawing.Size(247, 238)
         Me.lbBuildings.TabIndex = 0
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cmdStage2Database)
         Me.GroupBox1.Controls.Add(Me.cmdDropOldID)
         Me.GroupBox1.Controls.Add(Me.cmdMerge)
         Me.GroupBox1.Controls.Add(Me.cmdUpdateLinks)
@@ -67,7 +73,7 @@ Partial Class Form1
         '
         'cmdDropOldID
         '
-        Me.cmdDropOldID.Location = New System.Drawing.Point(27, 82)
+        Me.cmdDropOldID.Location = New System.Drawing.Point(27, 110)
         Me.cmdDropOldID.Name = "cmdDropOldID"
         Me.cmdDropOldID.Size = New System.Drawing.Size(231, 23)
         Me.cmdDropOldID.TabIndex = 3
@@ -76,7 +82,7 @@ Partial Class Form1
         '
         'cmdMerge
         '
-        Me.cmdMerge.Location = New System.Drawing.Point(27, 112)
+        Me.cmdMerge.Location = New System.Drawing.Point(27, 140)
         Me.cmdMerge.Name = "cmdMerge"
         Me.cmdMerge.Size = New System.Drawing.Size(231, 23)
         Me.cmdMerge.TabIndex = 2
@@ -139,6 +145,24 @@ Partial Class Form1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Database"
         '
+        'cmdDropDatabase
+        '
+        Me.cmdDropDatabase.Location = New System.Drawing.Point(27, 31)
+        Me.cmdDropDatabase.Name = "cmdDropDatabase"
+        Me.cmdDropDatabase.Size = New System.Drawing.Size(231, 23)
+        Me.cmdDropDatabase.TabIndex = 4
+        Me.cmdDropDatabase.Text = "Drop Intermediate Database"
+        Me.cmdDropDatabase.UseVisualStyleBackColor = True
+        '
+        'cmdCreateIntermediateDatabase
+        '
+        Me.cmdCreateIntermediateDatabase.Location = New System.Drawing.Point(27, 60)
+        Me.cmdCreateIntermediateDatabase.Name = "cmdCreateIntermediateDatabase"
+        Me.cmdCreateIntermediateDatabase.Size = New System.Drawing.Size(231, 23)
+        Me.cmdCreateIntermediateDatabase.TabIndex = 3
+        Me.cmdCreateIntermediateDatabase.Text = "Create Intermediate Database"
+        Me.cmdCreateIntermediateDatabase.UseVisualStyleBackColor = True
+        '
         'cmdReset
         '
         Me.cmdReset.Location = New System.Drawing.Point(27, 118)
@@ -192,29 +216,43 @@ Partial Class Form1
         Me.txtCurrentDatabase.Size = New System.Drawing.Size(399, 22)
         Me.txtCurrentDatabase.TabIndex = 9
         '
-        'cmdCreateIntermediateDatabase
+        'GroupBox3
         '
-        Me.cmdCreateIntermediateDatabase.Location = New System.Drawing.Point(27, 60)
-        Me.cmdCreateIntermediateDatabase.Name = "cmdCreateIntermediateDatabase"
-        Me.cmdCreateIntermediateDatabase.Size = New System.Drawing.Size(231, 23)
-        Me.cmdCreateIntermediateDatabase.TabIndex = 3
-        Me.cmdCreateIntermediateDatabase.Text = "Create Intermediate Database"
-        Me.cmdCreateIntermediateDatabase.UseVisualStyleBackColor = True
+        Me.GroupBox3.Controls.Add(Me.TextBox1)
+        Me.GroupBox3.Location = New System.Drawing.Point(16, 317)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(247, 188)
+        Me.GroupBox3.TabIndex = 10
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Process"
         '
-        'cmdDropDatabase
+        'TextBox1
         '
-        Me.cmdDropDatabase.Location = New System.Drawing.Point(27, 31)
-        Me.cmdDropDatabase.Name = "cmdDropDatabase"
-        Me.cmdDropDatabase.Size = New System.Drawing.Size(231, 23)
-        Me.cmdDropDatabase.TabIndex = 4
-        Me.cmdDropDatabase.Text = "Drop Intermediate Database"
-        Me.cmdDropDatabase.UseVisualStyleBackColor = True
+        Me.TextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox1.Location = New System.Drawing.Point(3, 18)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(241, 167)
+        Me.TextBox1.TabIndex = 0
+        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
+        '
+        'cmdStage2Database
+        '
+        Me.cmdStage2Database.Location = New System.Drawing.Point(27, 81)
+        Me.cmdStage2Database.Name = "cmdStage2Database"
+        Me.cmdStage2Database.Size = New System.Drawing.Size(231, 23)
+        Me.cmdStage2Database.TabIndex = 4
+        Me.cmdStage2Database.Text = "Merge to Stage 2 Database"
+        Me.cmdStage2Database.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1142, 518)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.txtCurrentDatabase)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmdClearErrors)
@@ -232,6 +270,8 @@ Partial Class Form1
         Me.Text = "CentrePro Data Integration Tool"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -255,4 +295,7 @@ Partial Class Form1
     Friend WithEvents txtCurrentDatabase As TextBox
     Friend WithEvents cmdCreateIntermediateDatabase As Button
     Friend WithEvents cmdDropDatabase As Button
+    Friend WithEvents cmdStage2Database As Button
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents TextBox1 As TextBox
 End Class

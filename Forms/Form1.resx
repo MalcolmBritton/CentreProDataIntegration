@@ -117,4 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TextBox1.Text" xml:space="preserve">
+    <value>1. Drop Intermediate Database
+2. Create Intermediate database and tables
+
+3. Select Building
+4. Fill Intermediate Database
+5. Update Links
+6. Merge to Stage 2 Database
+7. Drop Original IDs
+8. Merge to Main Database
+9. Empty Intermediate Database
+10. Repeat from 3 for each building</value>
+  </data>
 </root>
