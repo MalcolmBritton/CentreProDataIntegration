@@ -25,10 +25,13 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.lbBuildings = New System.Windows.Forms.ListBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmdDropRecreateStage2 = New System.Windows.Forms.Button()
+        Me.cmdCopyToStage2Database = New System.Windows.Forms.Button()
         Me.cmdDropOldID = New System.Windows.Forms.Button()
+        Me.cmdEmptyStage1 = New System.Windows.Forms.Button()
         Me.cmdMerge = New System.Windows.Forms.Button()
         Me.cmdUpdateLinks = New System.Windows.Forms.Button()
-        Me.cmdCreateIntermediate = New System.Windows.Forms.Button()
+        Me.cmdFillStage1 = New System.Windows.Forms.Button()
         Me.lbOutput = New System.Windows.Forms.ListBox()
         Me.lbError = New System.Windows.Forms.ListBox()
         Me.cmdClose = New System.Windows.Forms.Button()
@@ -36,14 +39,12 @@ Partial Class Form1
         Me.cmdDropDatabase = New System.Windows.Forms.Button()
         Me.cmdCreateIntermediateDatabase = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
-        Me.cmdEmpty = New System.Windows.Forms.Button()
         Me.cmdClearOutput = New System.Windows.Forms.Button()
         Me.cmdClearErrors = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtCurrentDatabase = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.cmdStage2Database = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -59,53 +60,82 @@ Partial Class Form1
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.cmdStage2Database)
+        Me.GroupBox1.Controls.Add(Me.cmdDropRecreateStage2)
+        Me.GroupBox1.Controls.Add(Me.cmdCopyToStage2Database)
         Me.GroupBox1.Controls.Add(Me.cmdDropOldID)
+        Me.GroupBox1.Controls.Add(Me.cmdEmptyStage1)
         Me.GroupBox1.Controls.Add(Me.cmdMerge)
         Me.GroupBox1.Controls.Add(Me.cmdUpdateLinks)
-        Me.GroupBox1.Controls.Add(Me.cmdCreateIntermediate)
+        Me.GroupBox1.Controls.Add(Me.cmdFillStage1)
         Me.GroupBox1.Location = New System.Drawing.Point(270, 66)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(285, 225)
+        Me.GroupBox1.Size = New System.Drawing.Size(285, 250)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Process"
         '
+        'cmdDropRecreateStage2
+        '
+        Me.cmdDropRecreateStage2.Location = New System.Drawing.Point(27, 174)
+        Me.cmdDropRecreateStage2.Name = "cmdDropRecreateStage2"
+        Me.cmdDropRecreateStage2.Size = New System.Drawing.Size(231, 23)
+        Me.cmdDropRecreateStage2.TabIndex = 5
+        Me.cmdDropRecreateStage2.Text = "Drop and ReCreate Stage 2 Database"
+        Me.cmdDropRecreateStage2.UseVisualStyleBackColor = True
+        '
+        'cmdCopyToStage2Database
+        '
+        Me.cmdCopyToStage2Database.Location = New System.Drawing.Point(27, 86)
+        Me.cmdCopyToStage2Database.Name = "cmdCopyToStage2Database"
+        Me.cmdCopyToStage2Database.Size = New System.Drawing.Size(231, 23)
+        Me.cmdCopyToStage2Database.TabIndex = 4
+        Me.cmdCopyToStage2Database.Text = "Copy to Stage 2 Database"
+        Me.cmdCopyToStage2Database.UseVisualStyleBackColor = True
+        '
         'cmdDropOldID
         '
-        Me.cmdDropOldID.Location = New System.Drawing.Point(27, 110)
+        Me.cmdDropOldID.Location = New System.Drawing.Point(27, 115)
         Me.cmdDropOldID.Name = "cmdDropOldID"
         Me.cmdDropOldID.Size = New System.Drawing.Size(231, 23)
         Me.cmdDropOldID.TabIndex = 3
-        Me.cmdDropOldID.Text = "Drop Original IDs"
+        Me.cmdDropOldID.Text = "Drop Original IDs (Stage 2)"
         Me.cmdDropOldID.UseVisualStyleBackColor = True
+        '
+        'cmdEmptyStage1
+        '
+        Me.cmdEmptyStage1.Location = New System.Drawing.Point(27, 201)
+        Me.cmdEmptyStage1.Name = "cmdEmptyStage1"
+        Me.cmdEmptyStage1.Size = New System.Drawing.Size(231, 23)
+        Me.cmdEmptyStage1.TabIndex = 1
+        Me.cmdEmptyStage1.Text = "Empty Stage 1 Database"
+        Me.cmdEmptyStage1.UseVisualStyleBackColor = True
         '
         'cmdMerge
         '
-        Me.cmdMerge.Location = New System.Drawing.Point(27, 140)
+        Me.cmdMerge.Location = New System.Drawing.Point(27, 145)
         Me.cmdMerge.Name = "cmdMerge"
         Me.cmdMerge.Size = New System.Drawing.Size(231, 23)
         Me.cmdMerge.TabIndex = 2
-        Me.cmdMerge.Text = "Merge to Main Database"
+        Me.cmdMerge.Text = "Merge to Main Database (Stage 2)"
         Me.cmdMerge.UseVisualStyleBackColor = True
         '
         'cmdUpdateLinks
         '
-        Me.cmdUpdateLinks.Location = New System.Drawing.Point(27, 52)
+        Me.cmdUpdateLinks.Location = New System.Drawing.Point(27, 57)
         Me.cmdUpdateLinks.Name = "cmdUpdateLinks"
         Me.cmdUpdateLinks.Size = New System.Drawing.Size(231, 23)
         Me.cmdUpdateLinks.TabIndex = 1
-        Me.cmdUpdateLinks.Text = "Update Links"
+        Me.cmdUpdateLinks.Text = "Update Links Stage 1"
         Me.cmdUpdateLinks.UseVisualStyleBackColor = True
         '
-        'cmdCreateIntermediate
+        'cmdFillStage1
         '
-        Me.cmdCreateIntermediate.Location = New System.Drawing.Point(27, 22)
-        Me.cmdCreateIntermediate.Name = "cmdCreateIntermediate"
-        Me.cmdCreateIntermediate.Size = New System.Drawing.Size(231, 23)
-        Me.cmdCreateIntermediate.TabIndex = 0
-        Me.cmdCreateIntermediate.Text = "Fill Intermediate Database"
-        Me.cmdCreateIntermediate.UseVisualStyleBackColor = True
+        Me.cmdFillStage1.Location = New System.Drawing.Point(27, 27)
+        Me.cmdFillStage1.Name = "cmdFillStage1"
+        Me.cmdFillStage1.Size = New System.Drawing.Size(231, 23)
+        Me.cmdFillStage1.TabIndex = 0
+        Me.cmdFillStage1.Text = "Fill Stage 1 Database"
+        Me.cmdFillStage1.UseVisualStyleBackColor = True
         '
         'lbOutput
         '
@@ -137,49 +167,39 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.cmdDropDatabase)
         Me.GroupBox2.Controls.Add(Me.cmdCreateIntermediateDatabase)
         Me.GroupBox2.Controls.Add(Me.cmdReset)
-        Me.GroupBox2.Controls.Add(Me.cmdEmpty)
-        Me.GroupBox2.Location = New System.Drawing.Point(270, 303)
+        Me.GroupBox2.Location = New System.Drawing.Point(270, 317)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(285, 202)
+        Me.GroupBox2.Size = New System.Drawing.Size(285, 188)
         Me.GroupBox2.TabIndex = 5
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Database"
         '
         'cmdDropDatabase
         '
-        Me.cmdDropDatabase.Location = New System.Drawing.Point(27, 31)
+        Me.cmdDropDatabase.Location = New System.Drawing.Point(27, 54)
         Me.cmdDropDatabase.Name = "cmdDropDatabase"
         Me.cmdDropDatabase.Size = New System.Drawing.Size(231, 23)
         Me.cmdDropDatabase.TabIndex = 4
-        Me.cmdDropDatabase.Text = "Drop Intermediate Database"
+        Me.cmdDropDatabase.Text = "Drop Stage1 Database"
         Me.cmdDropDatabase.UseVisualStyleBackColor = True
         '
         'cmdCreateIntermediateDatabase
         '
-        Me.cmdCreateIntermediateDatabase.Location = New System.Drawing.Point(27, 60)
+        Me.cmdCreateIntermediateDatabase.Location = New System.Drawing.Point(27, 83)
         Me.cmdCreateIntermediateDatabase.Name = "cmdCreateIntermediateDatabase"
         Me.cmdCreateIntermediateDatabase.Size = New System.Drawing.Size(231, 23)
         Me.cmdCreateIntermediateDatabase.TabIndex = 3
-        Me.cmdCreateIntermediateDatabase.Text = "Create Intermediate Database"
+        Me.cmdCreateIntermediateDatabase.Text = "Create Stage 1 Database"
         Me.cmdCreateIntermediateDatabase.UseVisualStyleBackColor = True
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(27, 118)
+        Me.cmdReset.Location = New System.Drawing.Point(27, 112)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(231, 23)
         Me.cmdReset.TabIndex = 2
-        Me.cmdReset.Text = "Reset Intermediate Database"
+        Me.cmdReset.Text = "Reset Stage 1 Database"
         Me.cmdReset.UseVisualStyleBackColor = True
-        '
-        'cmdEmpty
-        '
-        Me.cmdEmpty.Location = New System.Drawing.Point(27, 89)
-        Me.cmdEmpty.Name = "cmdEmpty"
-        Me.cmdEmpty.Size = New System.Drawing.Size(231, 23)
-        Me.cmdEmpty.TabIndex = 1
-        Me.cmdEmpty.Text = "Empty Intermediate Database"
-        Me.cmdEmpty.UseVisualStyleBackColor = True
         '
         'cmdClearOutput
         '
@@ -238,15 +258,6 @@ Partial Class Form1
         Me.TextBox1.TabIndex = 0
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
-        'cmdStage2Database
-        '
-        Me.cmdStage2Database.Location = New System.Drawing.Point(27, 81)
-        Me.cmdStage2Database.Name = "cmdStage2Database"
-        Me.cmdStage2Database.Size = New System.Drawing.Size(231, 23)
-        Me.cmdStage2Database.TabIndex = 4
-        Me.cmdStage2Database.Text = "Merge to Stage 2 Database"
-        Me.cmdStage2Database.UseVisualStyleBackColor = True
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -282,10 +293,10 @@ Partial Class Form1
     Friend WithEvents lbOutput As ListBox
     Friend WithEvents lbError As ListBox
     Friend WithEvents cmdClose As Button
-    Friend WithEvents cmdCreateIntermediate As Button
+    Friend WithEvents cmdFillStage1 As Button
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents cmdReset As Button
-    Friend WithEvents cmdEmpty As Button
+    Friend WithEvents cmdEmptyStage1 As Button
     Friend WithEvents cmdMerge As Button
     Friend WithEvents cmdUpdateLinks As Button
     Friend WithEvents cmdDropOldID As Button
@@ -295,7 +306,8 @@ Partial Class Form1
     Friend WithEvents txtCurrentDatabase As TextBox
     Friend WithEvents cmdCreateIntermediateDatabase As Button
     Friend WithEvents cmdDropDatabase As Button
-    Friend WithEvents cmdStage2Database As Button
+    Friend WithEvents cmdCopyToStage2Database As Button
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents cmdDropRecreateStage2 As Button
 End Class

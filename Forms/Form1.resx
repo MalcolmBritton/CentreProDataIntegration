@@ -118,16 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="TextBox1.Text" xml:space="preserve">
-    <value>1. Drop Intermediate Database
-2. Create Intermediate database and tables
+    <value>1. Drop Stage 1 Database
+2. Create Stage 1 database and tables
 
 3. Select Building
-4. Fill Intermediate Database
-5. Update Links
-6. Merge to Stage 2 Database
-7. Drop Original IDs
-8. Merge to Main Database
-9. Empty Intermediate Database
+4. Fill Stage 1 Database
+5. Update Links (Stage 1)
+6. Copy Stage 1 to Stage 2 Database
+7. Drop Original IDs (Stage 2)
+8. Merge Stage 2 to Main Database
+9. Drop and Re-Create Stage 2 database
+9. Empty Stage 1 Database
 10. Repeat from 3 for each building</value>
   </data>
 </root>

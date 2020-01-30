@@ -7,7 +7,7 @@ Public Class Form1
         Me.Close()
     End Sub
 
-    Private Sub cmdCreateIntermediate_Click(sender As Object, e As EventArgs) Handles cmdCreateIntermediate.Click
+    Private Sub cmdFillStage1_Click(sender As Object, e As EventArgs) Handles cmdFillStage1.Click
 
         Dim tableNames As List(Of String) = cData.GetTableNames
 
@@ -15,12 +15,12 @@ Public Class Form1
 
             For Each tn As String In tableNames
 
-                lbOutput.Items.Add("Adding Table to Intermediate - " & tn)
+                lbOutput.Items.Add("Adding Table to Stage 1 - " & tn)
                 If cData.ImportTableToIntermediate(tn, thisDB.ID, thisDB.DatabaseName) = True Then
-                    lbOutput.Items.Add("Table " & tn & " added to Intermediate")
+                    lbOutput.Items.Add("Table " & tn & " added to Stage 1")
                     lbOutput.TopIndex = lbOutput.Items.Count - 1
                 Else
-                    lbError.Items.Add("Table " & tn & " NOT added to Intermediate")
+                    lbError.Items.Add("Table " & tn & " NOT added to Stage 1")
                     lbError.TopIndex = lbError.Items.Count - 1
                 End If
             Next
@@ -28,10 +28,10 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cmdEmpty_Click(sender As Object, e As EventArgs) Handles cmdEmpty.Click
+    Private Sub cmdEmptyStage1_Click(sender As Object, e As EventArgs) Handles cmdEmptyStage1.Click
 
         cData.EmptyIntermediateDatabase(False)
-        lbOutput.Items.Add("Imtermediate database Emptied")
+        lbOutput.Items.Add("Stage 1 database Emptied")
         lbOutput.TopIndex = lbOutput.Items.Count - 1
 
     End Sub
@@ -506,4 +506,5 @@ Public Class Form1
         End If
 
     End Sub
+
 End Class
