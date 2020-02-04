@@ -56,8 +56,8 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_Master;Integrated Secu"& _ 
-            "rity=True;MultipleActiveResultSets=true")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=SCAFELL\SQLEXPRESS2017;Initial Catalog=CentrePro_Master;Integrated Se"& _ 
+            "curity=True;MultipleActiveResultSets=true")>  _
         Public Property conCentreProMaster() As String
             Get
                 Return CType(Me("conCentreProMaster"),String)
@@ -69,8 +69,8 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_Intermediate;Integrate"& _ 
-            "d Security=True;MultipleActiveResultSets=true")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=SCAFELL\SQLEXPRESS2017;Initial Catalog=CentrePro_Intermediate;Integra"& _ 
+            "ted Security=True;MultipleActiveResultSets=true")>  _
         Public Property conIntermediate() As String
             Get
                 Return CType(Me("conIntermediate"),String)
@@ -82,8 +82,8 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_UM_1282;Integrated Sec"& _ 
-            "urity=True;MultipleActiveResultSets=true")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=SCAFELL\SQLEXPRESS2017;Initial Catalog=CentrePro_UM_1282;Integrated S"& _ 
+            "ecurity=True;MultipleActiveResultSets=true")>  _
         Public Property conTridentCounrt() As String
             Get
                 Return CType(Me("conTridentCounrt"),String)
@@ -95,13 +95,26 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=HELVELLYN\SQLEXPRESS;uid=sa;pwd=Spyplane1;database=")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=SCAFELL\SQLEXPRESS2017;uid=sa;pwd=Spyplane1;database=")>  _
         Public Property conServerOnly() As String
             Get
                 Return CType(Me("conServerOnly"),String)
             End Get
             Set
                 Me("conServerOnly") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=SCAFELL\SQLEXPRESS2017;Initial Catalog=CentrePro_Stage2;Integrated Se"& _ 
+            "curity=True;MultipleActiveResultSets=true")>  _
+        Public Property conStage2() As String
+            Get
+                Return CType(Me("conStage2"),String)
+            End Get
+            Set
+                Me("conStage2") = value
             End Set
         End Property
     End Class

@@ -3,16 +3,19 @@
   <Profiles />
   <Settings>
     <Setting Name="conCentreProMaster" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_Master;Integrated Security=True;MultipleActiveResultSets=true</Value>
+      <Value Profile="(Default)">Data Source=SCAFELL\SQLEXPRESS2017;Initial Catalog=CentrePro_Master;Integrated Security=True;MultipleActiveResultSets=true</Value>
     </Setting>
     <Setting Name="conIntermediate" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_Intermediate;Integrated Security=True;MultipleActiveResultSets=true</Value>
+      <Value Profile="(Default)">Data Source=SCAFELL\SQLEXPRESS2017;Initial Catalog=CentrePro_Intermediate;Integrated Security=True;MultipleActiveResultSets=true</Value>
     </Setting>
     <Setting Name="conTridentCounrt" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=HELVELLYN\SQLEXPRESS;Initial Catalog=CentrePro_UM_1282;Integrated Security=True;MultipleActiveResultSets=true</Value>
+      <Value Profile="(Default)">Data Source=SCAFELL\SQLEXPRESS2017;Initial Catalog=CentrePro_UM_1282;Integrated Security=True;MultipleActiveResultSets=true</Value>
     </Setting>
     <Setting Name="conServerOnly" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=HELVELLYN\SQLEXPRESS;uid=sa;pwd=Spyplane1;database=</Value>
+      <Value Profile="(Default)">Data Source=SCAFELL\SQLEXPRESS2017;uid=sa;pwd=Spyplane1;database=</Value>
+    </Setting>
+    <Setting Name="conStage2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=SCAFELL\SQLEXPRESS2017;Initial Catalog=CentrePro_Stage2;Integrated Security=True;MultipleActiveResultSets=true</Value>
     </Setting>
   </Settings>
 </SettingsFile>

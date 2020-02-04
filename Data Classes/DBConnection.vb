@@ -45,6 +45,11 @@
 
     End Function
 
+    Public Shared Function GetConnectionStage2() As SqlConnection
+
+        Return New SqlConnection(My.Settings.conStage2)
+
+    End Function
     Public Shared Function GetConnectionBuilding(sConn As String) As SqlConnection
 
         ' Connect to a specific building database in the enterprise

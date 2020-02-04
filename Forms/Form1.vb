@@ -28,6 +28,31 @@ Public Class Form1
 
     End Sub
 
+    Private Sub cmdCopyToStage2Database_Click(sender As Object, e As EventArgs) Handles cmdCopyToStage2Database.Click
+
+        ' copy the data from Centrepro_Intermediate to CentrePro_Stage2
+
+        Dim tableNames As List(Of String) = cData.GetTableNamesStage2
+
+        If tableNames.Count > 0 Then
+
+            For Each tn As String In tableNames
+
+                lbOutput.Items.Add("Importing Table Data to CentrePro_Stage2 - " & tn)
+                lbOutput.TopIndex = lbOutput.Items.Count - 1
+                If cData.ImportTableToStage2(tn) = True Then
+                    'lbOutput.Items.Add("Table " & tn & " added to Intermediate")
+                    'lbOutput.TopIndex = lbOutput.Items.Count - 1
+                Else
+                    lbError.Items.Add("Table " & tn & " NOT imported to CentrePro_Master")
+                    lbError.TopIndex = lbError.Items.Count - 1
+                End If
+            Next
+        End If
+
+    End Sub
+
+
     Private Sub cmdEmptyStage1_Click(sender As Object, e As EventArgs) Handles cmdEmptyStage1.Click
 
         cData.EmptyIntermediateDatabase(False)
@@ -426,7 +451,7 @@ Public Class Form1
 
     Private Sub cmdDropOldID_Click(sender As Object, e As EventArgs) Handles cmdDropOldID.Click
 
-        Dim tableNames As List(Of String) = cData.GetTableNames
+        Dim tableNames As List(Of String) = cData.GetTableNamesStage2
 
         If tableNames.Count > 0 Then
 
@@ -434,16 +459,18 @@ Public Class Form1
 
                 If cData.HasColumn("ID", tn) > 0 Then
 
-                    lbOutput.Items.Add("Dropping ID Column from " & tn)
-                    lbOutput.TopIndex = lbOutput.Items.Count - 1
-                    cData.DropColumn("ID", tn)
-                    If cData.HasColumn("NewID", tn) Then
-                        lbOutput.Items.Add("Renaming NewID to ID in " & tn)
+                    If tn.ToUpper <> "BUSINESSCENTRE" Then
+                        lbOutput.Items.Add("Dropping ID Column from " & tn)
                         lbOutput.TopIndex = lbOutput.Items.Count - 1
-                        cData.RenameColumn("NewID", tn, "ID")
+                        cData.DropColumn("ID", tn)
+                        If cData.HasColumn("NewID", tn) Then
+                            lbOutput.Items.Add("Renaming NewID to ID in " & tn)
+                            lbOutput.TopIndex = lbOutput.Items.Count - 1
+                            cData.RenameColumn("NewID", tn, "ID")
+                        End If
                     End If
-                End If
 
+                End If
             Next
 
         End If
@@ -487,15 +514,15 @@ Public Class Form1
 
     Private Sub cmdMerge_Click(sender As Object, e As EventArgs) Handles cmdMerge.Click
 
-        Dim tableNames As List(Of String) = cData.GetTableNames
+        Dim tableNames As List(Of String) = cData.GetTableNamesStage2
 
         If tableNames.Count > 0 Then
 
             For Each tn As String In tableNames
 
-                lbOutput.Items.Add("Adding Table Data to CentrePro_Master - " & tn)
+                lbOutput.Items.Add("Adding Stage 2 Table Data to CentrePro_Master - " & tn)
                 lbOutput.TopIndex = lbOutput.Items.Count - 1
-                If cData.ImportIntermediateTableToMaster(tn) = True Then
+                If cData.ImportStage2TableToMaster(tn) = True Then
                     'lbOutput.Items.Add("Table " & tn & " added to Intermediate")
                     'lbOutput.TopIndex = lbOutput.Items.Count - 1
                 Else
@@ -506,5 +533,6 @@ Public Class Form1
         End If
 
     End Sub
+
 
 End Class

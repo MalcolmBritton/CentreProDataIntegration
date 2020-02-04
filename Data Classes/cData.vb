@@ -4106,6 +4106,40 @@ Public Class cData
 
     End Function
 
+    Public Shared Function GetTableNamesStage2() As List(Of String)
+
+        Dim tn As New List(Of String)
+        Dim SQLstring As String
+
+        SQLstring = "SELECT name FROM sysobjects WHERE xtype = 'U' order by name"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionStage2
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLstring, connection)
+
+                Using reader As SqlDataReader = cmd.ExecuteReader
+
+                    If reader.HasRows Then
+
+                        tn = New List(Of String)
+
+                        Do While reader.Read
+                            tn.Add(reader("name"))
+                        Loop
+
+                    End If
+
+                End Using ' reader
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return tn
+    End Function
+
     Public Shared Function GetTableNames() As List(Of String)
 
         Dim tn As New List(Of String)
@@ -4159,7 +4193,7 @@ Public Class cData
 
         Dim bRetVal As Integer
 
-        Dim SQLString As String = "DROP DATABASE CentrePro_Intermediate"
+        Dim SQLString As String = "ALTER DATABASE [CentrePro_Intermediate] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE DROP DATABASE CentrePro_Intermediate"
 
         Using connection As SqlConnection = DBConnection.GetConnectionServer
 
@@ -4228,7 +4262,7 @@ Public Class cData
 
         Dim SQLString As String = "SELECT COUNT(OBJECT_ID) FROM sys.columns WHERE Name = N'" & colName & "' and OBJECT_ID = OBJECT_ID(N'" & tablename & "')"
 
-        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+        Using connection As SqlConnection = DBConnection.GetConnectionStage2
 
             connection.Open()
 
@@ -4250,7 +4284,7 @@ Public Class cData
 
         Dim SQLString As String = "ALTER TABLE " & tableName & " DROP COLUMN " & colName
 
-        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+        Using connection As SqlConnection = DBConnection.GetConnectionStage2
 
             connection.Open()
 
@@ -4272,7 +4306,7 @@ Public Class cData
 
         Dim SQLString As String = "EXEC sp_rename '" & tableName & "." & colName & "', '" & newColName & "', 'COLUMN'"
 
-        Using connection As SqlConnection = DBConnection.GetConnectionIntermediate
+        Using connection As SqlConnection = DBConnection.GetConnectionStage2
 
             connection.Open()
 
@@ -4286,6 +4320,28 @@ Public Class cData
 
         Return bRetVal
 
+
+    End Function
+
+    Public Shared Function HasIdentityColumnMaster(tableName As String) As Integer
+
+        Dim bRetVal As Integer
+
+        Dim SQLString As String = "SELECT Count(Column_ID) FROM sys.identity_columns WHERE OBJECT_NAME(object_id) = '" & tableName & "'"
+
+        Using connection As SqlConnection = DBConnection.GetConnectionCentreProMaster
+
+            connection.Open()
+
+            Using cmd As New SqlCommand(SQLString, connection)
+
+                bRetVal = cmd.ExecuteScalar
+
+            End Using ' cmd
+
+        End Using ' connection
+
+        Return bRetVal
 
     End Function
 
@@ -4308,6 +4364,29 @@ Public Class cData
         End Using ' connection
 
         Return bRetVal
+
+    End Function
+
+    Public Shared Function ImportTableToStage2(sTableName As String)
+
+
+        ' No need to check for identiy column in stage2 as there are none!
+        Dim SQLUpdate As String = "INSERT INTO " & sTableName & " SELECT * FROM CentrePro_intermediate.dbo." & sTableName
+
+        Using connection As SqlConnection = DBConnection.GetConnectionStage2
+
+            connection.Open()
+
+            Try
+                Using cmdUpdate As New SqlCommand(SQLUpdate, connection)
+                    cmdUpdate.ExecuteNonQuery()
+                End Using 'cmdUpdate
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+
+        End Using 'connection
 
     End Function
 
@@ -4340,18 +4419,9 @@ Public Class cData
         End Using 'connection
     End Function
 
-    Public Shared Function ImportIntermediateTableToMaster(sTableName As String)
+    Public Shared Function ImportStage2TableToMaster(sTableName As String)
 
-        Dim SQLUpdate As String = String.Empty
-
-        Select Case HasIdentityColumn(sTableName)
-            Case 1
-                SQLUpdate = "SET IDENTITY_INSERT " & sTableName & " ON "
-                SQLUpdate &= "INSERT INTO " & sTableName & " SELECT * FROM CentrePro_intermediate.dbo." & sTableName
-                SQLUpdate &= " SET IDENTITY_INSERT " & sTableName & " OFF "
-            Case 0
-                SQLUpdate = "INSERT INTO " & sTableName & " SELECT * FROM CentrePro_intermediate.dbo." & sTableName
-        End Select
+        Dim SQLUpdate As String = "INSERT INTO " & sTableName & " SELECT * FROM CentrePro_Stage2.dbo." & sTableName
 
         Using connection As SqlConnection = DBConnection.GetConnectionCentreProMaster
 
